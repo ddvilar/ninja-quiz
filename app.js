@@ -1,5 +1,6 @@
 const correctAnswers = ['B', 'B', 'B', 'B'];
 const form = document.querySelector('.form-container');
+const result = document.querySelector('.result');
 const userScore = document.querySelector('.user-score');
 
 form.addEventListener('submit', e => {
@@ -18,10 +19,28 @@ form.addEventListener('submit', e => {
        }
    });
 
-   //Add the score on the page
-   userScore.textContent = `${score}%`;
+   //Scroll to the top of the page
+   scroll({
+    top: 0,
+    behavior: 'smooth'
+   });
 
-})
+   //Create score animation
+   let output = 0;
+   const timer = setInterval(() => {
+    //Add the score to the span element   
+    userScore.textContent = `${output}%`;
+    if(output === score) {
+        clearInterval(timer);
+    } else {
+        output++;
+    }
+   }, 10);
+
+   //Display the score to user
+   result.style.display = 'block';
+   
+});
 
 
 
